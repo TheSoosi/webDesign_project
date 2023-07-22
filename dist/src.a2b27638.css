@@ -668,7 +668,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   
   html {
     height: 100%;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;;
     font-size: 16px;
   }
   
@@ -709,15 +709,14 @@ svg.leaflet-image-layer.leaflet-interactive path {
   }
   
   #map-wrapper {
-    flex-grow: 2;
-    flex-shrink: 0;
+    width: 40%;
     background-color: #aae;
   }
   
   #chart-wrapper {
     display: flex;
+    width: 60%;
     flex-direction: column;
-    flex-grow: 3;
     background-color: #eee;
   }
 
@@ -727,20 +726,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
     z-index: 10;
   }
   
-  #chart-types {
-    flex-grow: 1;
-    background-color: #7ae;
-  }
-  
   #chart {
-    flex-grow: 2;
-    display: flex;
-    justify-content: center;
-  }
-
-  #chart-content {
-    flex-grow: 1;
-    max-width: 400px;
+    flex: 0 0 auto;
+    width: calc(100% - 4rem);
+    height: calc(50% - 4rem);
+    margin: 2rem;
   }
 
   .legend {

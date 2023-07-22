@@ -7,7 +7,7 @@ export class App{
         await initMap();
         const data = await loadElectionData();
         setElectionData(data);
-        //buildChartPartyVotes(data);
+        buildChartPartyVotes(data);
     }
     
 }
