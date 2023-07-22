@@ -1,5 +1,4 @@
 import L from "leaflet";
-
 import "leaflet/dist/leaflet.css";
 
 let map = null;
@@ -8,10 +7,10 @@ let layerControl = null;
 let baseLayer = null;
 let legend = null;
 
-const partyColorMapping = {
-    "VAS, (+DEVA-88)": "#f00",
+export const partyColorMapping = {
+    "VAS, (+DEVA-88)": "#ff0000",
     "VIHR": "#005901",
-    "PS": "#00f",
+    "PS": "#0000ff",
     "SDP": "#ff9a03",
     "KOK": "#03ffff",
     "KESK (**LKP-84)": "#73ff00",
@@ -85,6 +84,12 @@ export function setElectionData(data) {
         const party = municipality.mostVotedParty
 
         layer.bindTooltip(`<p><strong>Municipality: </strong>${municipality.name}</p> <p><strong>Party: </strong>${party.partyName}</p> <p><strong>Votes: </strong>${party.votes}</p>`)
+        
+        let partyVoteItems = "";
+        municipality.partyVotes.forEach((element) => {
+            partyVoteItems += `<li>${element.partyName}: ${element.votes}</li>`;
+        })
+        layer.bindPopup(`<ul>${partyVoteItems}</ul>`);
     })
     
     legend = L.control({ position: "bottomleft" });
