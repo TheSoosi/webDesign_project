@@ -729,8 +729,28 @@ svg.leaflet-image-layer.leaflet-interactive path {
   #chart {
     flex: 0 0 auto;
     width: calc(100% - 4rem);
-    height: calc(50% - 4rem);
+    height: calc(40% - 4rem);
     margin: 2rem;
+  }
+
+  #chart2 {
+    flex: 0 0 auto;
+    width: calc(100% - 4rem);
+    height: calc(60% - 7rem);
+    margin: 2rem;
+  }
+
+  #municipality-select {
+    margin: 0 2rem;
+  }
+
+  #municipality-select label {
+    margin-right: 1rem;
+  }
+
+  #municipality-select select {
+    width: 16rem;
+    height: 2rem;
   }
 
   .legend {
