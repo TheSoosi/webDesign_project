@@ -803,6 +803,12 @@ svg.leaflet-image-layer.leaflet-interactive path {
     margin-top: 0.5rem;
   }
 
+  #map-popup ul{
+    padding-left: 1rem;
+    
+  }
+
+
   @media screen and (max-width: 768px) {
     #main {
       display: flex;

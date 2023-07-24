@@ -89,7 +89,22 @@ export function setElectionData(data) {
         municipality.partyVotes.forEach((element) => {
             partyVoteItems += `<li>${element.partyName}: ${element.votes}</li>`;
         })
-        layer.bindPopup(`<ul>${partyVoteItems}</ul>`);
+        
+        const popupDiv = document.createElement("div");
+        popupDiv.id = "map-popup"
+        popupDiv.innerHTML = `<h4>Party votes in ${municipality.name}</h4><ul>${partyVoteItems}</ul>`;
+        const link = document.createElement("a");
+        link.id = "show-party-votes-link"
+        link.href = "#chart2"
+        link.innerText = "Show party votes for the region on the chart"
+        link.dataset.regionKey = municipality.municipalityKey;
+        link.onclick = () => {
+            const select = document.getElementById("municipality-choice");
+            select.value = link.dataset.regionKey;
+            select.dispatchEvent(new Event("change"));
+        }
+        popupDiv.appendChild(link);
+        layer.bindPopup(popupDiv);
     })
     
     legend = L.control({ position: "bottomleft" });

@@ -140,7 +140,7 @@ export async function loadElectionData() {
 
     Object.entries(data.dimension.Alue.category.index).forEach((entry) => {
         const municipalityKey = entry[0];
-         const i = entry[1];
+        const i = entry[1];
         const element = data.dimension.Alue.category.label[municipalityKey];
         const elementParts = element.split(" ");
         const municipalityCode = elementParts[0];
@@ -171,6 +171,7 @@ export async function loadElectionData() {
             name: element,
             partyVotes: partyVotes,
             mostVotedParty: mostVoted,
+            municipalityKey: municipalityKey,
         }
 
 

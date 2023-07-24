@@ -14824,7 +14824,21 @@ function setElectionData(data) {
     municipality.partyVotes.forEach(function (element) {
       partyVoteItems += "<li>".concat(element.partyName, ": ").concat(element.votes, "</li>");
     });
-    layer.bindPopup("<ul>".concat(partyVoteItems, "</ul>"));
+    var popupDiv = document.createElement("div");
+    popupDiv.id = "map-popup";
+    popupDiv.innerHTML = "<h4>Party votes in ".concat(municipality.name, "</h4><ul>").concat(partyVoteItems, "</ul>");
+    var link = document.createElement("a");
+    link.id = "show-party-votes-link";
+    link.href = "#chart2";
+    link.innerText = "Show party votes for the region on the chart";
+    link.dataset.regionKey = municipality.municipalityKey;
+    link.onclick = function () {
+      var select = document.getElementById("municipality-choice");
+      select.value = link.dataset.regionKey;
+      select.dispatchEvent(new Event("change"));
+    };
+    popupDiv.appendChild(link);
+    layer.bindPopup(popupDiv);
   });
   legend = _leaflet.default.control({
     position: "bottomleft"
@@ -15087,7 +15101,8 @@ function _loadElectionData() {
             var municipality = {
               name: element,
               partyVotes: partyVotes,
-              mostVotedParty: mostVoted
+              mostVotedParty: mostVoted,
+              municipalityKey: municipalityKey
             };
             result[municipalityCode] = municipality;
           });
@@ -30972,7 +30987,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53141" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53251" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
