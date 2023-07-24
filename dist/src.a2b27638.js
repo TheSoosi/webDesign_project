@@ -14831,16 +14831,29 @@ function setElectionData(data) {
   });
   legend.onAdd = function () {
     var div = _leaflet.default.DomUtil.create("div", "legend");
-    div.innerHTML += "<h4>Parties</h4>";
+    var legendContent = '<div id="main-legend-content"><h4>Parties</h4>';
     Object.entries(partyColorMapping).forEach(function (entity) {
       var _entity = _slicedToArray(entity, 2),
         partyName = _entity[0],
         color = _entity[1];
-      div.innerHTML += "<i style=\"background: ".concat(color, "\"></i><span>").concat(partyName, "</span><br>");
+      legendContent += "<i style=\"background: ".concat(color, "\"></i><span>").concat(partyName, "</span><br>");
     });
+    legendContent += "</div>";
+    legendContent += '<div class="checkbox-row"><input id="show-legend" type="checkbox" checked="true"><label for="show-legend">Show legend</label></div>';
+    div.innerHTML += legendContent;
     return div;
   };
   legend.addTo(map);
+  var showLegendCheckbox = document.getElementById("show-legend");
+  showLegendCheckbox.onchange = function (event) {
+    var checked = event.target.checked;
+    var mainLegendContent = document.getElementById("main-legend-content");
+    if (checked) {
+      mainLegendContent.style.display = "block";
+    } else {
+      mainLegendContent.style.display = "none";
+    }
+  };
 }
 },{"leaflet":"node_modules/leaflet/dist/leaflet-src.js","leaflet/dist/leaflet.css":"node_modules/leaflet/dist/leaflet.css"}],"src/dataLoader.js":[function(require,module,exports) {
 "use strict";
@@ -30959,7 +30972,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59587" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53141" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

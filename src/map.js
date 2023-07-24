@@ -97,17 +97,31 @@ export function setElectionData(data) {
     legend.onAdd = function() {
         const div = L.DomUtil.create("div", "legend");
     
-        div.innerHTML += "<h4>Parties</h4>";
+        let legendContent = '<div id="main-legend-content"><h4>Parties</h4>';
 
         Object.entries(partyColorMapping).forEach((entity) => {
             const [partyName, color] = entity;
-            div.innerHTML += `<i style="background: ${color}"></i><span>${partyName}</span><br>`
+            legendContent += `<i style="background: ${color}"></i><span>${partyName}</span><br>`
         }) 
 
+        legendContent += "</div>";
+        legendContent += '<div class="checkbox-row"><input id="show-legend" type="checkbox" checked="true"><label for="show-legend">Show legend</label></div>';
+
+        div.innerHTML += legendContent;
 
         return div;
     }
 
     legend.addTo(map);
-   
+
+    const showLegendCheckbox = document.getElementById("show-legend");
+    showLegendCheckbox.onchange = (event) => {
+      const checked = event.target.checked;
+      const mainLegendContent = document.getElementById("main-legend-content");
+      if (checked) {
+        mainLegendContent.style.display = "block";
+      } else {
+        mainLegendContent.style.display = "none";
+      }
+    }
 }
